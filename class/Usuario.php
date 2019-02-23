@@ -56,6 +56,46 @@ public function setDtcadastro($dtcadastro){
          
      }
  }
+    //Método busca todos os usuários
+    public static function getList(){
+        
+        $sql = new Sql;
+        
+        return $sql->select("SELECT * FROM tb_usuario ORDER BY deslogin;");
+    }
+    
+    //Busca pelo nome que o login tenha ou parte do nome
+    public static function seach($login){
+        $sql = new Sql();
+        
+        return $sql->select("SELECT * FROM tb_usuario WHERE deslogin LIKE :SEACH ORDER BY deslogin", array(
+        ':SEACH'=>"%" .$login. "%"
+        ));
+    }
+    
+    //Faz uma validação dos parâmetros para poder retornar 
+    public function login($login, $pass){
+        
+         $sql = new Sql();
+     
+     $result = $sql->select("SELECT * FROM tb_usuario WHERE deslogin = :LOGIN AND dessenha = :PASS" , array(
+        ":LOGIN"=>$login,
+        ":PASS"=>$pass 
+     ));
+     
+         if(count($result) > 0){
+
+             $row = $result[0];
+
+             $this->setIdusuario($row['idusuario']);
+             $this->setDeslogin($row['deslogin']);
+             $this->setDessenha($row['dessenha']);
+             $this->setDtcadastro(new DateTime($row['dtcadastro']));
+         }else{
+             
+             throw new Exception("Login e/ou senha incorretos!!!");
+         }
+    }
      
      public function __toString(){
          
