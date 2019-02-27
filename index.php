@@ -15,8 +15,36 @@ require_once("config.php");
 //$seach = Usuario::seach("ma");
 //echo json_encode($seach);
 
-$usuario = new Usuario();
-$usuario->login("user", "111223");
 
-echo $usuario;
+//$usuario = new Usuario();
+//$usuario->login("user", "111223");
+
+//echo $usuario;
+
+/*
+//Inserindo sem uso do construtor 
+$aluno = new Usuario();
+
+$aluno->setDeslogin("AlunoMM");
+$aluno->setDessenha("eppeeppe");
+
+$aluno->insert();
+
+echo $aluno;
+*/
+
+/*
+//Inserindo com o construtor
+$aluno = new Usuario("Vicente", "jajaja");
+$aluno->insert();
+echo $aluno;
+*/
+
+//Fazendo o update pelo id
+$aluno = new Usuario();
+
+$aluno->loadbyId(7);
+$aluno->update("profissional", "mestre");
+echo $aluno;
+
 ?>
