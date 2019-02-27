@@ -40,11 +40,22 @@ $aluno->insert();
 echo $aluno;
 */
 
+/*
 //Fazendo o update pelo id
 $aluno = new Usuario();
 
 $aluno->loadbyId(7);
 $aluno->update("profissional", "mestre");
 echo $aluno;
+*/
+
+//Deletando registro da tabela pelo id 
+$aluno = new Usuario();
+
+$aluno->loadbyId(3);
+$aluno->delete();
+echo $aluno;
+
+
 
 ?>
